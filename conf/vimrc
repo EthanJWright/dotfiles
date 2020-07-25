@@ -1,5 +1,8 @@
 set nocompatible
 
+" make a much nicer leader key binding
+let mapleader = " "
+
 " VIM session handling: :S sessionname to save your current session 
 " ( doesn't save files ) | from outside of vim : s sessionname to open session
 function MakeSession(session)
@@ -11,9 +14,7 @@ command! -nargs=1 S call MakeSession(<f-args>)
 " Termanl Remap
 "" I can't figure out why but on some distros twk needs to be
 "set and on some termkey needs to be set
-set twk=<C-H>
-" set termkey=<C-H> 
-
+set twk=<C-H> " set termkey=<C-H> 
 
 command V :vert term
 set splitbelow " split all windows below, including the terminal which is where I always want it
@@ -520,3 +521,14 @@ fu! InsertTabWrapper(direction)
 endfu
 inoremap <tab> <c-r>=InsertTabWrapper("forward")<cr>
 inoremap <s-tab> <c-r>=InsertTabWrapper("backward")<cr>
+
+" Solid leader key mappings
+nnoremap <Leader>vs :vs<CR>
+nnoremap <Leader>sp :sp<CR>
+
+" Saving and exiting commands
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>wa :wa<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qq :qa!<CR>
+nnoremap <Leader>wq :wq<CR>

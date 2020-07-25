@@ -1,7 +1,45 @@
 " PLUGIN VIMRC CONTENT
 call plug#begin()
 
+
+Plug 'mhinz/vim-startify'
+let g:startify_change_to_dir = 0
+let g:startify_bookmarks = [
+    \ { 'i' : '~/.config/nvim/init.vim' },
+    \ ]
+let g:startify_lists = [
+          \ { 'type': 'files',     'header': ['   Files']            },
+          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ ]
+
+Plug 'vim-scripts/Tabmerge'
+nnoremap <Leader>tt :tabnew<CR>:Startify<CR>
+nnoremap <Leader>tm :Tabmerge right<CR>
+
+Plug 'justinmk/vim-sneak' " jump to 2 char match (sxy)
+Plug 'unblevable/quick-scope'
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 filetype plugin indent on
+
+
+Plug 'tpope/vim-fugitive'
+" Sweet Sweet FuGITive
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+nmap <leader>gc :Git commit<CR>
+nmap <leader>ga :Git add --all<CR>
+nmap <leader>gp :Git push<CR>
+nmap <leader>gs :G<CR>
 
 " Better Syntax Highlighting
 Plug 'sheerun/vim-polyglot' 
@@ -83,19 +121,17 @@ let g:ale_linters = {
 "show git differences
 Plug 'mhinz/vim-signify' 
 " fuzzy find files
-Plug 'kien/ctrlp.vim'
-let g:ctrlp_working_path_mode = 0
-nnoremap <C-F> :CtrlPBuffer<Enter>
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+nnoremap <Leader>h :History:<CR>
+nmap <C-P> :Files<CR>
+nmap <C-F> :Buffers<CR>
 
 " File type and syntax for swift
 Plug 'keith/swift.vim' 
 Plug 'vim-syntastic/syntastic'
 " Handle ctags smarter
 Plug 'ludovicchabant/vim-gutentags' 
-
-" File tree in nerdtree
-Plug 'scrooloose/nerdtree' 
-command Tog :NERDTreeToggle
 
 " Tpope Plugins
 " vim verb on surrouding operators
