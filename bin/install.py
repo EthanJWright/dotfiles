@@ -160,6 +160,15 @@ def install_fzf():
         return None
 
 
+def install_rg():
+    if not is_installed('rg'):
+        commands = []
+        if (is_linux()):
+            commands.append("sudo apt-get install ripgrep -y")
+        if (is_mac()):
+            commands.append("brew install ripgrep")
+
+
 def install_bat():
     if not is_installed('bat'):
         name = "BAT"
@@ -258,6 +267,7 @@ def main(argv):
     inform.append(install_linters())
     inform.append(install_plug())
     inform.append(install_npm_md())
+    inform.append(install_rg())
     install_extra_dirs()
 
     def remove_none(item):

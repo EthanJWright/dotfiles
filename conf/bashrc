@@ -7,6 +7,11 @@ shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+# Configure FZF to use ripgrep
+export FZF_DEFAULT_COMMAND='rg --files'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Luke Smith inspired bashrc stuff
 # Enable vim mode in bash
 set -o vi 
